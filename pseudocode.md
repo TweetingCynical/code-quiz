@@ -7,9 +7,9 @@ Steps to achieving the working quiz:
 * Set an intial timer of 60 seconds, and a score of 0;
 * When user clicks start button:
   - Timer begins countdown;
-  - Start button disappears;
-  - h1 tag (Coding Quiz Challenge) reads: QUESTION *ONE*;
-  - p tag reads question.one.question content;
+  - Start screen set to hide;
+  - Remove questions class 'hide';
+  - h2 tag reads: QUESTION *ONE*;
   - Four buttons for answer choices appear next to content of answers;
 * When user clicks correct answer:
   - Timer +=5;

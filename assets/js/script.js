@@ -1,7 +1,12 @@
 // Reference to document elements
-let timerDisplay = document.querySelector('#time');
-let scoreDisplay = document.querySelector('#score');
-let startBtn = document.querySelector('#start')
+const timerDisplay = document.querySelector('#time');
+const scoreDisplay = document.querySelector('#score');
+const startBtn = document.querySelector('#start')
+const startScreen = document.querySelector('#start-screen')
+const questionsScreen = document.querySelector('#questions')
+const questionTitle = document.querySelector('#question-title')
+const questionChoices = document.querySelector('#choices')
+const addQs = ['a', 'b', 'c', 'd']
 
 // Set intial time/score details
 let timeLeft = 60;
@@ -15,7 +20,18 @@ startBtn.addEventListener("click", beginQuiz)
 function beginQuiz() {
   // Begin clock count
   setTime()
-  // Begin first question
+  // Hide start, show first question
+  startScreen.classList.add("hide");
+  questionsScreen.classList.remove("hide");
+  for(let i = 0; i < 4; i++) {
+    let opt = document.createElement('button');
+    questionChoices.appendChild(opt).setAttribute("class", "choice");
+  }
+  const qBtn = document.querySelectorAll(".choice")
+  for(let i = 0; i < qBtn.length; i++) {
+    qBtn[i].setAttribute("id", addQs[i])
+  }
+  showQuestion()
 }
 
 function addTime() {
@@ -23,7 +39,7 @@ function addTime() {
 }
 
 function subtractTime() {
-  timeLeft -=5;
+  timeLeft -=10;
 }
 
 function setTime() {
@@ -38,3 +54,14 @@ function setTime() {
   }, 1000);
 }
 
+function showQuestion () {
+  qBtn = document.querySelectorAll(".choice")
+  console.log(qBtn)
+  questionTitle.textContent = questions[1].question
+  
+  // This is not going to work because we need to use qNum for the above question part too
+  let qNum = 1;
+  for (let i = 0; i < qBtn.length; i++) {
+    qBtn[i].textContent = questions[qNum].answers.addQs[i]
+  }
+}

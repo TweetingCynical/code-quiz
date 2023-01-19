@@ -1,5 +1,5 @@
 const questions = {
-  one: {
+  1: {
     question: 'What is the correct way to write a JavaScript array?',
     answers: {
       a: 'let colors = "red", "blue", "green"',
@@ -8,7 +8,7 @@ const questions = {
       d: 'let colors = 1="red", 2="blue", 3="green"'},
     correct: 'b'},
   
-  two: {
+  2: {
     question: 'How do you create a function in JavaScript?',
     answers: {
       a: 'function = myFunction()',
@@ -17,7 +17,7 @@ const questions = {
       d: 'let myFunction = function()'},
     correct: 'd'},
   
-  three: {
+  3: {
     question: 'What is the correct way to write a JavaScript object?',
     answers: {
       a: 'let person = {name:"John", age:30}',
@@ -26,7 +26,7 @@ const questions = {
       d: 'let person = ("name":"John", "age":30)'},
     correct: 'a'},
   
-  four: {
+  4: {
     question: 'How do you write a JavaScript for loop?',
     answers: {
       a: 'for i = 1 to 5',
@@ -35,7 +35,7 @@ const questions = {
       d: 'for i = 0 to 5, i++'},
     correct: 'c'},
   
-  five: {
+  5: {
     question: 'What is the correct way to write a JavaScript if statement?',
     answers: {
       a: 'if i = 5',
@@ -44,7 +44,7 @@ const questions = {
       d: 'if (i == 5)'},
     correct: 'd'},
   
-  six: {
+  6: {
     question: 'How do you write a JavaScript while loop?',
     answers: {
       a: 'while i = 1 to 10',
@@ -53,7 +53,7 @@ const questions = {
       d: 'while (i = 1; i <= 10; i++)'},
     correct: 'b'},
   
-  seven: {
+  7: {
     question: 'How do you write a JavaScript switch statement?',
     answers: {
       a: 'switch (i) {case 0: x = "zero"; break; case 1: x = "one"; break;}',
@@ -62,16 +62,16 @@ const questions = {
       d: 'switch (i) {case "0": x = "zero"; break; case "1": x = "one"; break;}'},
     correct: 'a'},
   
-  eight: {
-    question: 'What is the correct way to write a JavaScript try-catch statement?',
+  8: {
+    question: 'How do you find out the local storage value for the username?',
     answers: {
-      a: 'try i = a + b; catch (err) {console.log(err);}',
-      b: 'try {i = a + b;} catch (err) {console.log(err);}',
-      c: 'try {i = a + b;} catch {console.log(err);}',
-      d: 'try i = a + b catch {console.log(err);}'},
+      a: 'let username = local.storage',
+      b: 'let username = localStorage.getItem("user")',
+      c: 'let username = getItem.localStorage("username")',
+      d: 'let username = localStorage("username")'},
     correct: 'b'},
   
-  nine: {
+  9: {
     question: 'How do you write a JavaScript do-while loop?',
     answers: {
       a: 'do { i++; } while (i <= 10);',
@@ -80,7 +80,7 @@ const questions = {
       d: 'do i++; while i <= 10;'},
     correct: 'a'},
   
-  ten: {
+  10: {
     question: 'How do you write a JavaScript function that takes in parameters?',
     answers: {
       a: 'myFunction(i, j) {return i * j;}',
@@ -89,7 +89,7 @@ const questions = {
       d: 'let myFunction = function(i, j) {return i * j;}'},
     correct: 'c'},
   
-  eleven: {
+  11: {
     question: 'How do you write a JavaScript function that returns a value?',
     answers: {
       a: 'myFunction() {return x;}',
@@ -98,7 +98,7 @@ const questions = {
       d: 'let myFunction = function() {return x;}'},
     correct: 'c'},
   
-  twelve: {
+  12: {
     question: 'How do you write a JavaScript for-in loop?',
     answers: {
       a: 'for i = 0 to myArray {console.log(i);}',
@@ -107,7 +107,7 @@ const questions = {
       d: 'for (i in myArray) {console.log(myArray[i]);}'},
     correct: 'd'},
   
-  thirteen: {
+  13: {
     question: 'How do you write a JavaScript for-of loop?',
     answers: {
       a: 'for (i of myArray) {console.log(i);}',
@@ -116,7 +116,7 @@ const questions = {
       d: 'for i = 0 to myArray {console.log(i);}'},
     correct: 'a'},
   
-  fourteen: {
+  14: {
     question: 'How do you write a JavaScript ternary operator?',
     answers: {
       a: 'x == 5 ? console.log("x is 5") : console.log("x is not 5")',
@@ -125,7 +125,7 @@ const questions = {
       d: 'x == 5 {c,onsole.log("x is 5")} else {console.log("x is not 5")}'},
     correct: 'a'},
 
-  fifteen: {    
+  15: {    
     question: 'How do you write a JavaScript arrow function?',
     answers: {
       a: 'let myFunction = => {return x;}',

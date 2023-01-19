@@ -1,16 +1,56 @@
+/* Import font from Google api */
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+/* Add stored options for main and secondary colours used in site */
+:root {
+  --mainColor: #3C1934;
+  --secondaryColor: #AA3619;
+  --secondaryColorOP: #AA361980;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 1280px;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+  background-color: var(--mainColor);
+  color: white;
+}
 body {
   font-family: Arial;
   font-size: 120%;
+  background-color: white;
+  color: var(--mainColor);
+  min-height: 600px;
+}
+
+header, footer {
+  text-align: center;
+  padding: 10px;
+  padding-top: 0px;
+  color: white;
+  background-color: var(--mainColor);
+}
+
+#topBar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 a {
-  color: #563d7c;
+  color: var(--secondaryColor);
   text-decoration: none;
   transition: color 0.1s;
 }
 
 a:hover {
-  color: #8570a5;
+  color: var(--secondaryColorOP);
 }
 
 button {
@@ -18,7 +58,7 @@ button {
   margin: 5px;
   cursor: pointer;
   font-size: 100%;
-  background-color: #563d7c;
+  background-color: var(--secondaryColor);
   border-radius: 5px;
   padding: 2px 10px;
   color: white;
@@ -27,7 +67,7 @@ button {
 }
 
 button:hover {
-  background-color: #8570a5;
+  background-color: var(--secondaryColorOP);
 }
 
 .choices button {
@@ -67,10 +107,10 @@ li:nth-child(odd) {
 }
 
 .scores {
-  position: absolute;
+  position: relative;
   top: 10px;
   left: 10px;
-}
+} 
 
 .feedback {
   font-style: italic;
@@ -81,8 +121,8 @@ li:nth-child(odd) {
   border-top: 2px solid #ccc;
 }
 
-.timer {
-  position: absolute;
+.metrics {
+  position: relative;
   top: 10px;
   right: 10px;
 }

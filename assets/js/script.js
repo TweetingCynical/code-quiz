@@ -11,6 +11,8 @@ const addQs = ['a', 'b', 'c', 'd']
 // Set intial time/score details
 let timeLeft = 60;
 let currScore = 0;
+let currQ = 1
+let qNum = 1;
 timerDisplay.innerText = timeLeft;
 scoreDisplay.innerText = currScore;
 
@@ -31,11 +33,13 @@ function beginQuiz() {
   for(let i = 0; i < qBtn.length; i++) {
     qBtn[i].setAttribute("id", addQs[i])
   }
-  showQuestion()
+    showQuestion(currQ)
 }
 
 function addTime() {
   timeLeft +=5;
+  currScore ++;
+  scoreDisplay.innerText = currScore;
 }
 
 function subtractTime() {
@@ -54,14 +58,37 @@ function setTime() {
   }, 1000);
 }
 
-function showQuestion () {
+function showQuestion (currQ) {
   qBtn = document.querySelectorAll(".choice")
-  console.log(qBtn)
-  questionTitle.textContent = questions[1].question
+  questionTitle.textContent = questions[currQ].question
   
-  // This is not going to work because we need to use qNum for the above question part too
-  let qNum = 1;
   for (let i = 0; i < qBtn.length; i++) {
-    qBtn[i].textContent = questions[qNum].answers.addQs[i]
+    qBtn[i].textContent = questions[qNum].answers[addQs[i]];
+    localStorage.setItem("answer", "")
+    qBtn[i].addEventListener("click", function(event){
+      let answer = event.target.getAttribute('id');
+      let correct = questions[qNum].correct;
+      localStorage.setItem("answer", answer)
+      localStorage.setItem("correct", correct)
+      compareAnswers()
+    });
   }
+}
+
+function compareAnswers() {
+  let answer = localStorage.getItem("answer")
+  let correct = localStorage.getItem("correct")
+  if (answer === correct) {
+    console.log(currScore)
+    addTime()
+    console.log(currScore)
+    // alert("This is correct!")
+  }
+  else {
+    subtractTime()
+    // alert("Oh damn!")
+  }
+  currQ++
+  qNum++
+  showQuestion(currQ)
 }

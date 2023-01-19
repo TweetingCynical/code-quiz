@@ -12,7 +12,6 @@ const addQs = ['a', 'b', 'c', 'd']
 let timeLeft = 60;
 let currScore = 0;
 let currQ = 1
-let qNum = 1;
 timerDisplay.innerText = timeLeft;
 scoreDisplay.innerText = currScore;
 
@@ -59,18 +58,24 @@ function setTime() {
 }
 
 function showQuestion (currQ) {
+  console.log(currQ)
   qBtn = document.querySelectorAll(".choice")
-  questionTitle.textContent = questions[currQ].question
+  let key = Object.keys(questions)
+  questionTitle.textContent = key[currQ-1] + ": " + questions[currQ].question
   
   for (let i = 0; i < qBtn.length; i++) {
-    qBtn[i].textContent = questions[qNum].answers[addQs[i]];
+    qBtn[i].textContent = questions[currQ].answers[addQs[i]];
     localStorage.setItem("answer", "")
     qBtn[i].addEventListener("click", function(event){
-      let answer = event.target.getAttribute('id');
-      let correct = questions[qNum].correct;
-      localStorage.setItem("answer", answer)
-      localStorage.setItem("correct", correct)
-      compareAnswers()
+      if(event.target === this) {
+        let answer = event.target.getAttribute('id');
+        let correct = questions[currQ].correct;
+        localStorage.setItem("answer", answer)
+        localStorage.setItem("correct", correct)
+        compareAnswers()
+        currQ++
+        showQuestion(currQ)
+      }
     });
   }
 }
@@ -88,7 +93,4 @@ function compareAnswers() {
     subtractTime()
     // alert("Oh damn!")
   }
-  currQ++
-  qNum++
-  showQuestion(currQ)
 }

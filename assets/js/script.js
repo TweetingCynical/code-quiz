@@ -32,7 +32,7 @@ function beginQuiz() {
   for(let i = 0; i < qBtn.length; i++) {
     qBtn[i].setAttribute("id", addQs[i])
   }
-    showQuestion(1)
+    showQuestion(currQ)
 }
 
 function addTime() {
@@ -76,6 +76,8 @@ function showQuestion (currQ) {
       }
     });
   }
+  currQ++
+  showQuestion(currQ)
 }
 
 function compareAnswers() {

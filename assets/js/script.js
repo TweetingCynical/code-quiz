@@ -79,14 +79,10 @@ function compareAnswers() {
   let answer = localStorage.getItem("answer")
   let correct = localStorage.getItem("correct")
   if (answer === correct) {
-    console.log(currScore)
     addTime()
-    console.log(currScore)
-    // alert("This is correct!")
   }
   else {
     subtractTime()
-    // alert("Oh damn!")
   }
   currQ++
   qNum++

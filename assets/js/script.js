@@ -32,7 +32,7 @@ function beginQuiz() {
   for(let i = 0; i < qBtn.length; i++) {
     qBtn[i].setAttribute("id", addQs[i])
   }
-    showQuestion(currQ)
+    showQuestion(1)
 }
 
 function addTime() {
@@ -47,7 +47,7 @@ function subtractTime() {
 
 function setTime() {
   let timerInterval = setInterval(function() {
-    timeLeft --;
+    timeLeft--;
     timerDisplay.textContent = timeLeft;
 
     if (timeLeft === 0) {
@@ -73,8 +73,6 @@ function showQuestion (currQ) {
         localStorage.setItem("answer", answer)
         localStorage.setItem("correct", correct)
         compareAnswers()
-        currQ++
-        showQuestion(currQ)
       }
     });
   }

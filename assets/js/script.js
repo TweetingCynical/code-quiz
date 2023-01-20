@@ -124,5 +124,6 @@ function endQuiz() {
   submitBtn.addEventListener("click", function() {
     let roundArray = JSON.stringify([initials.value, scoreEnd, timeLeftEnd]);
     localStorage.setItem("roundArray", roundArray);
+    document.location.href = "highscores.html";
   })
 }

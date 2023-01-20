@@ -12,6 +12,7 @@ const finalTime = document.querySelector('#final-time')
 const submitBtn = document.querySelector('#submit')
 const initials = document.querySelector('#initials')
 const addQs = ['a', 'b', 'c', 'd']
+let highScoresArray = [];
 
 // Set intial time/score details
 let timeLeft = 60;
@@ -82,7 +83,6 @@ function showQuestion (currQ) {
   
   for (let i = 0; i < qBtn.length; i++) {
     qBtn[i].textContent = questions[currQ].answers[addQs[i]];
-    localStorage.setItem("answer", "")
   }
 }
 
@@ -116,8 +116,14 @@ function endQuiz() {
   questionsScreen.classList.add("hide");
   endScreen.classList.remove("hide");
   submitBtn.addEventListener("click", function() {
-    let roundArray = JSON.stringify([initials.value, scoreEnd, timeLeftEnd]);
-    localStorage.setItem("roundArray", roundArray);
+    let roundArray = [initials.value, scoreEnd, timeLeftEnd];
+    let storedHighScores = JSON.parse(localStorage.getItem("highScoresArray"));
+
+    if (storedHighScores !== null) {
+      highScoresArray = storedHighScores
+    }
+    highScoresArray.push(roundArray)
+    localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
     document.location.href = "highscores.html";
   })
 }

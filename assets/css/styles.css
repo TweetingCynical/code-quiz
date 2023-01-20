@@ -82,6 +82,7 @@ ol {
   padding-left: 0px;
   max-height: 400px;
   overflow: auto;
+  width: 90%;
 }
 
 li {
@@ -102,7 +103,7 @@ li:nth-child(odd) {
   display: none;
 }
 
-.start {
+.start, .highScores {
   text-align: center;
 }
 

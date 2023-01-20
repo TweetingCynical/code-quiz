@@ -31,6 +31,15 @@ function beginQuiz() {
   const qBtn = document.querySelectorAll(".choice")
   for(let i = 0; i < qBtn.length; i++) {
     qBtn[i].setAttribute("id", addQs[i])
+    qBtn[i].addEventListener("click", function(event){
+      if(event.target === this) {
+        let answer = event.target.getAttribute('id');
+        let correct = questions[currQ].correct;
+        localStorage.setItem("answer", answer)
+        localStorage.setItem("correct", correct)
+        compareAnswers()
+      }
+    });
   }
     showQuestion(currQ)
 }
@@ -66,18 +75,7 @@ function showQuestion (currQ) {
   for (let i = 0; i < qBtn.length; i++) {
     qBtn[i].textContent = questions[currQ].answers[addQs[i]];
     localStorage.setItem("answer", "")
-    qBtn[i].addEventListener("click", function(event){
-      if(event.target === this) {
-        let answer = event.target.getAttribute('id');
-        let correct = questions[currQ].correct;
-        localStorage.setItem("answer", answer)
-        localStorage.setItem("correct", correct)
-        compareAnswers()
-      }
-    });
   }
-  currQ++
-  showQuestion(currQ)
 }
 
 function compareAnswers() {
@@ -89,4 +87,6 @@ function compareAnswers() {
   else {
     subtractTime()
   }
+  currQ++
+  showQuestion(currQ)
 }

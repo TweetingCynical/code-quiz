@@ -41,9 +41,7 @@ function beginQuiz() {
       if(event.target === this) {
         let answer = event.target.getAttribute('id');
         let correct = questions[currQ].correct;
-        localStorage.setItem("answer", answer)
-        localStorage.setItem("correct", correct)
-        compareAnswers()
+        compareAnswers(answer, correct)
       }
     });
   }
@@ -88,11 +86,7 @@ function showQuestion (currQ) {
   }
 }
 
-function compareAnswers() {
-  let answer = localStorage.getItem("answer")
-  let correct = localStorage.getItem("correct")
-  console.log("Chosen answer = " + answer)
-  console.log("Correct answer = " + correct)
+function compareAnswers(answer, correct) {
   if (answer === correct) {
     addTime()
   }

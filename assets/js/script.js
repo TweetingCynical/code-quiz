@@ -4,8 +4,13 @@ const scoreDisplay = document.querySelector('#score');
 const startBtn = document.querySelector('#start')
 const startScreen = document.querySelector('#start-screen')
 const questionsScreen = document.querySelector('#questions')
+const endScreen = document.querySelector('#end-screen')
 const questionTitle = document.querySelector('#question-title')
 const questionChoices = document.querySelector('#choices')
+const finalScore = document.querySelector('#final-score')
+const finalTime = document.querySelector('#final-time')
+const submitBtn = document.querySelector('#submit')
+const initials = document.querySelector('#initials')
 const addQs = ['a', 'b', 'c', 'd']
 
 // Set intial time/score details
@@ -32,6 +37,7 @@ function beginQuiz() {
   for(let i = 0; i < qBtn.length; i++) {
     qBtn[i].setAttribute("id", addQs[i])
     qBtn[i].addEventListener("click", function(event){
+      event.stopPropagation()
       if(event.target === this) {
         let answer = event.target.getAttribute('id');
         let correct = questions[currQ].correct;
@@ -57,11 +63,15 @@ function subtractTime() {
 function setTime() {
   let timerInterval = setInterval(function() {
     timeLeft--;
-    timerDisplay.textContent = timeLeft;
+    if (timeLeft < 0) {
+      timerDisplay.textContent = 0;
+    } else {
+      timerDisplay.textContent = timeLeft;
+    }
 
-    if (timeLeft === 0) {
+    if (timeLeft <= 0) {
       clearInterval(timerInterval)
-      // endQuiz()
+      endQuiz()
     }
   }, 1000);
 }
@@ -81,6 +91,8 @@ function showQuestion (currQ) {
 function compareAnswers() {
   let answer = localStorage.getItem("answer")
   let correct = localStorage.getItem("correct")
+  console.log("Chosen answer = " + answer)
+  console.log("Correct answer = " + correct)
   if (answer === correct) {
     addTime()
   }
@@ -88,5 +100,29 @@ function compareAnswers() {
     subtractTime()
   }
   currQ++
-  showQuestion(currQ)
+  if (currQ <= 15) {
+    showQuestion(currQ)
+  }
+  else {
+    endQuiz()
+  }
+
+}
+
+function endQuiz() {
+  let timeLeftEnd;
+  if (timeLeft < 0) {
+    timeLeftEnd = 0
+  } else {
+    timeLeftEnd = timeLeft
+  }
+  let scoreEnd = currScore;
+  finalScore.textContent = scoreEnd;
+  finalTime.textContent = timeLeftEnd;
+  questionsScreen.classList.add("hide");
+  endScreen.classList.remove("hide");
+  submitBtn.addEventListener("click", function() {
+    let roundArray = JSON.stringify([initials.value, scoreEnd, timeLeftEnd]);
+    localStorage.setItem("roundArray", roundArray);
+  })
 }

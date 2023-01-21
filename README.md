@@ -34,6 +34,9 @@
 Working version of site should look like this at standard screen size:
 ![Site Screenshot](./assets/screenshot.png)
 
+New and improved performance feedback page after each attempt:
+![Site Screenshot](./assets/screenshot-data.png)
+
 ### Scope and Purpose
 
 Build an interactive coding quiz with a series of multiple choice questions. The quiz should track the user's score, allow them to click a button to select their answer, and also track the time they have left. Finally, the user should be able to save their score to a high score page, and reset all stored scores on click of a clear button.

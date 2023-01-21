@@ -194,7 +194,7 @@ Some of the key JavaScript skills being utilised:
 - ✅ ~~Store how many seconds the user has left at the end of the game, for use in the high score board~~
 - ✅ ~~Add sounds for correct and incorrect answers~~
 - ✅ ~~Add visual feedback for if answer is correct or incorrect~~
-- Add validation to initials entry
+- ✅ ~~Add validation to initials entry~~
 - Build in data feedback of performance, e.g.
   - number of questions answered
   - ratio of correct to incorrect to unanswered

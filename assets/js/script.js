@@ -129,6 +129,12 @@ function endQuiz() {
 
   // Add event listener to submit button
   submitBtn.addEventListener("click", function() {
+    // Check if user has entered any initials
+    const inputError = displayErrMsg()
+    if (inputError) {
+      return;
+    }
+
     // Store current attempt as a three part array
     let roundArray = [initials.value, scoreEnd, timeLeftEnd];
 
@@ -148,6 +154,25 @@ function endQuiz() {
     // Move to highscores page to complete actions for this round
     document.location.href = "highscores.html";
   })
+}
+
+// Check for errors in the userInput or userKey
+function displayErrMsg() {
+  // Check initials is not null
+  let initialsErrMsg = "";
+  if (initials.value.length < 1) {
+    initialsErrMsg = "You must enter at least one letter";
+    const userInputError = document.querySelector("#userInputError")
+    userInputError.textContent = initialsErrMsg;
+    userInputError.classList.remove("hide");
+    setTimeout(function() {
+      userInputError.classList.add("hide")
+    }, 1000);
+  }
+  // Return true if error message has content
+  if (initialsErrMsg.length > 0) {
+    return true;
+  }
 }
 
 // Event Listeners

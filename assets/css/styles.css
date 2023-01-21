@@ -91,7 +91,7 @@ ol {
 }
 
 li {
-  padding: 10px;
+  padding: 8px;
   list-style: decimal inside none;
   text-align: left;
 }
@@ -120,6 +120,7 @@ li:nth-child(odd) {
 
 .start, .highScores {
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .scores {
@@ -155,4 +156,12 @@ li:nth-child(odd) {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.errorAlert {
+  color: red;
+  font-weight:bolder;
+  font-size: 10px;
+  margin-top: -20px;
+  margin-left: 120px;
 }

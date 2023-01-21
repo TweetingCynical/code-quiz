@@ -32,7 +32,7 @@ function addTime(sound) {
   timeLeft += 5;
   currScore++;
   scoreDisplay.innerText = currScore;
-  sound.play();
+  // sound.play();
   correct.classList.remove("hide");
   // use setTimeout so that message is only displayed for 0.5s
   setTimeout(function () {
@@ -43,7 +43,7 @@ function addTime(sound) {
 // Do if user answer was incorrect
 function subtractTime(sound) {
   timeLeft -= 10;
-  sound.play();
+  // sound.play();
   incorrect.classList.remove("hide");
   // use setTimeout so that message is only displayed for 0.5s
   setTimeout(function () {
@@ -132,31 +132,41 @@ function endQuiz() {
 
   // Add event listener to submit button
   submitBtn.addEventListener("click", function () {
-    // Check if user has entered any initials
-    const inputError = displayErrMsg();
-    if (inputError) {
-      return;
-    }
-
-    // Store current attempt as a three part array
-    let roundArray = [initials.value, scoreEnd, timeLeftEnd];
-
-    // Get existing local storage of highScoresArray and parse back into array of arrays
-    let storedHighScores = JSON.parse(localStorage.getItem("highScoresArray"));
-
-    // If stored array is not empty, set highScoresArray variable to local stored value
-    if (storedHighScores !== null) {
-      highScoresArray = storedHighScores;
-    }
-
-    // Push current attempt array into highScoresArray
-    highScoresArray.push(roundArray);
-
-    // Overwrite newly pushed array into local storage for use on the high scores page
-    localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
-    // Move to highscores page to complete actions for this round
-    document.location.href = "highscores.html";
+    submit(scoreEnd, timeLeftEnd);
   });
+  initials.addEventListener("keyup", function (event) {
+    console.log(event.keyCode);
+    if (event.keyCode === 13) {
+      submit(scoreEnd, timeLeftEnd);
+    }
+  });
+}
+
+function submit(scoreEnd, timeLeftEnd) {
+  // Check if user has entered any initials
+  const inputError = displayErrMsg();
+  if (inputError) {
+    return;
+  }
+
+  // Store current attempt as a three part array
+  let roundArray = [initials.value, scoreEnd, timeLeftEnd];
+
+  // Get existing local storage of highScoresArray and parse back into array of arrays
+  let storedHighScores = JSON.parse(localStorage.getItem("highScoresArray"));
+
+  // If stored array is not empty, set highScoresArray variable to local stored value
+  if (storedHighScores !== null) {
+    highScoresArray = storedHighScores;
+  }
+
+  // Push current attempt array into highScoresArray
+  highScoresArray.push(roundArray);
+
+  // Overwrite newly pushed array into local storage for use on the high scores page
+  localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
+  // Move to highscores page to complete actions for this round
+  document.location.href = "highscores.html";
 }
 
 // Check for errors in the userInput or userKey

@@ -47,7 +47,13 @@
         </p>
       </div>
 
-      <div id="feedback" class="feedback hide"></div>
+      <div id="feedback" class="feedback"><span class="hide" id="incorrect">Incorrect</span><span class="hide" id="correct">Correct</span></div>
+      <audio id="correctSound">
+        <source src="./assets/sfx/correct.wav" type="audio/wav">
+      </audio>
+      <audio id="incorrectSound">
+        <source src="./assets/sfx/incorrect.wav" type="audio/wav">
+      </audio>
     </div>
 
   <script src="./assets/js/questions.js"></script>

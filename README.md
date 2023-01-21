@@ -180,11 +180,21 @@ Some of the key JavaScript skills being utilised:
   clearBtn.addEventListener("click", clearHighScores)
   ```
 
+* Use of setTimeout to show and quickly hide again, a message giving the user visual feedback on their performance:
+
+  ```javascript
+  incorrect.classList.remove("hide")
+  setTimeout(function() {
+    incorrect.classList.add("hide")
+  }, 500);
+  ```
+
 ### Suggested future changes
 
 - ✅ ~~Store how many seconds the user has left at the end of the game, for use in the high score board~~
-- Add sounds for correct and incorrect answers
-- Add visual feedback for if answer is correct or incorrect
+- ✅ ~~Add sounds for correct and incorrect answers~~
+- ✅ ~~Add visual feedback for if answer is correct or incorrect~~
+- Add validation to initials entry
 - Build in data feedback of performance, e.g.
   - number of questions answered
   - ratio of correct to incorrect to unanswered

@@ -7,6 +7,10 @@ const questionsScreen = document.querySelector('#questions')
 const endScreen = document.querySelector('#end-screen')
 const questionTitle = document.querySelector('#question-title')
 const questionChoices = document.querySelector('#choices')
+const correct = document.querySelector('#correct');
+const incorrect = document.querySelector('#incorrect');
+const correctSound = document.querySelector('#correctSound');
+const incorrectSound = document.querySelector('#incorrectSound');
 const finalScore = document.querySelector('#final-score')
 const finalTime = document.querySelector('#final-time')
 const submitBtn = document.querySelector('#submit')
@@ -25,15 +29,25 @@ timerDisplay.innerText = timeLeft;
 scoreDisplay.innerText = currScore;
 
 // Do if user answer was correct
-function addTime() {
+function addTime(sound) {
   timeLeft +=5;
   currScore ++;
   scoreDisplay.innerText = currScore;
+  sound.play()
+  correct.classList.remove("hide")
+  setTimeout(function() {
+    correct.classList.add("hide")
+  }, 500);
 }
 
 // Do if user answer was incorrect
-function subtractTime() {
+function subtractTime(sound) {
   timeLeft -=10;
+  sound.play()
+  incorrect.classList.remove("hide")
+  setTimeout(function() {
+    incorrect.classList.add("hide")
+  }, 500);
 }
 
 // Run timer from 60 seconds
@@ -74,11 +88,11 @@ function showQuestion (currQ) {
 function compareAnswers(answer, correct) {
   // Do if user is correct
   if (answer === correct) {
-    addTime()
+    addTime(correctSound)
   }
   // Do if user is incorrect
   else {
-    subtractTime()
+    subtractTime(incorrectSound)
   }
   // Increment current question by one
   currQ++

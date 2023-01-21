@@ -110,6 +110,14 @@ li:nth-child(odd) {
   display: none;
 }
 
+#incorrect {
+  color: red;
+}
+
+#correct {
+  color: green;
+}
+
 .start, .highScores {
   text-align: center;
 }
@@ -121,12 +129,12 @@ li:nth-child(odd) {
 } 
 
 .feedback {
-  font-style: italic;
+  font-style: bold;
   font-size: 120%;
   margin-top: 20px;
   padding-top: 10px;
-  color: gray;
-  border-top: 2px solid #ccc;
+  color: var(--mainColor);
+  text-align: center;
 }
 
 .metrics {

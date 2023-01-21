@@ -8,6 +8,9 @@ const questions = {
       d: 'let colors = 1="red", 2="blue", 3="green"',
     },
     correct: "b",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   2: {
@@ -19,6 +22,9 @@ const questions = {
       d: "let myFunction = function()",
     },
     correct: "d",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   3: {
@@ -30,6 +36,9 @@ const questions = {
       d: 'let person = ("name":"John", "age":30)',
     },
     correct: "a",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   4: {
@@ -41,6 +50,9 @@ const questions = {
       d: "for i = 0 to 5, i++",
     },
     correct: "c",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   5: {
@@ -52,6 +64,9 @@ const questions = {
       d: "if (i == 5)",
     },
     correct: "d",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   6: {
@@ -63,6 +78,9 @@ const questions = {
       d: "while (i = 1; i <= 10; i++)",
     },
     correct: "b",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   7: {
@@ -74,6 +92,9 @@ const questions = {
       d: 'switch (i) {case "0": x = "zero"; break; case "1": x = "one"; break;}',
     },
     correct: "a",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   8: {
@@ -85,6 +106,9 @@ const questions = {
       d: 'let username = localStorage("username")',
     },
     correct: "b",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   9: {
@@ -96,6 +120,9 @@ const questions = {
       d: "do i++; while i <= 10;",
     },
     correct: "a",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   10: {
@@ -108,6 +135,9 @@ const questions = {
       d: "let myFunction = function(i, j) {return i * j;}",
     },
     correct: "c",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   11: {
@@ -119,6 +149,9 @@ const questions = {
       d: "let myFunction = function() {return x;}",
     },
     correct: "c",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   12: {
@@ -130,6 +163,9 @@ const questions = {
       d: "for (i in myArray) {console.log(myArray[i]);}",
     },
     correct: "d",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   13: {
@@ -141,6 +177,9 @@ const questions = {
       d: "for i = 0 to myArray {console.log(i);}",
     },
     correct: "a",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   14: {
@@ -152,6 +191,9 @@ const questions = {
       d: 'x == 5 {c,onsole.log("x is 5")} else {console.log("x is not 5")}',
     },
     correct: "a",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 
   15: {
@@ -163,5 +205,8 @@ const questions = {
       d: "myFunction() => {return x;}",
     },
     correct: "b",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
   },
 };

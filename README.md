@@ -20,6 +20,7 @@
 </details>
 
 <!-- About the Project -->
+
 ## About the Project
 
 ### Deployment / Code Repository
@@ -46,57 +47,58 @@ This site and its codeset are for educational purposes only.
 N/A
 
 <!-- Pseudocode and overview of build -->
+
 ## Pseudocode
 
 Steps to achieving the working quiz:
 
-* Set an intial timer of 60 seconds, and a score of 0;
-* When user clicks start button:
+- Set an intial timer of 60 seconds, and a score of 0;
+- When user clicks start button:
   - Timer begins countdown;
   - Start screen set to hide;
   - Remove questions class 'hide';
-  - h2 tag reads: QUESTION *ONE*;
+  - h2 tag reads: QUESTION _ONE_;
   - Four buttons for answer choices appear next to content of answers;
-* When user clicks correct answer:
+- When user clicks correct answer:
   - Timer +=5;
   - Score ++;
   - Display next question;
-* When user clicks incorrect answer:
+- When user clicks incorrect answer:
   - Timer -+5;
   - Score no change;
   - Display next question;
-* When either no more questions, or timer == 0, game ends:
-  - Hide questions; 
+- When either no more questions, or timer == 0, game ends:
+  - Hide questions;
   - Display end screen and score;
-* When user submits initials:
+- When user submits initials:
   - Add score and initials to saved highscores object;
   - Display highscores page, listing stored scores in descending order from top;
     - This may require a for loop to append new child, and then access each child by index, assigning the text content by highest in the stored object;
-* When user clicks Go Back, return to initial state;
-* When user clicks clear Highscores, empty stored score and initial history.
+- When user clicks Go Back, return to initial state;
+- When user clicks clear Highscores, empty stored score and initial history.
 
 ## Overview of Build
 
 Some of the key JavaScript skills being utilised:
 
-* Use of an object of objects for storing a scalable question bank;
-* Use of query selectors to get elements by id and class:
+- Use of an object of objects for storing a scalable question bank;
+- Use of query selectors to get elements by id and class:
 
   ```javascript
-  qBtn = document.querySelectorAll(".choice")
-  const questionsScreen = document.querySelector('#questions')
+  qBtn = document.querySelectorAll(".choice");
+  const questionsScreen = document.querySelector("#questions");
   ```
 
-* Use of for loops to create a set of buttons:
+- Use of for loops to create a set of buttons:
 
   ```javascript
-  for(let i = 0; i < addQs.length; i++) {
-    let opt = document.createElement('button');
+  for (let i = 0; i < addQs.length; i++) {
+    let opt = document.createElement("button");
     questionChoices.appendChild(opt).setAttribute("class", "choice");
   }
   ```
 
-* Use of another for loop to supply each button with an event listener and its question/answer content. Also use of event.target to match the click target to its id:
+- Use of another for loop to supply each button with an event listener and its question/answer content. Also use of event.target to match the click target to its id:
 
   ```javascript
   for(let i = 0; i < qBtn.length; i++) {
@@ -110,22 +112,22 @@ Some of the key JavaScript skills being utilised:
   });
   ```
 
-* Use of object.keys to allow indexing into an object:
+- Use of object.keys to allow indexing into an object:
 
   ```javascript
-  let key = Object.keys(questions)
+  let key = Object.keys(questions);
   ```
 
-* Use of a timer to run every 1000ms:
+- Use of a timer to run every 1000ms:
 
   ```javascript
   function setTime() {
-    let timerInterval = setInterval(function() {
+    let timerInterval = setInterval(function () {
       timeLeft--;
       if (timeLeft <= 0) {
         timerDisplay.textContent = 0;
-        clearInterval(timerInterval)
-        endQuiz()
+        clearInterval(timerInterval);
+        endQuiz();
       } else {
         timerDisplay.textContent = timeLeft;
       }
@@ -133,59 +135,60 @@ Some of the key JavaScript skills being utilised:
   }
   ```
 
-* Use of functions to track multiple changing variables and display them on screen:
+- Use of functions to track multiple changing variables and display them on screen:
 
   ```javascript
   function addTime() {
-    timeLeft +=5;
-    currScore ++;
+    timeLeft += 5;
+    currScore++;
     scoreDisplay.innerText = currScore;
   }
   ```
 
-* Use of add and remove classes to show and hide different on screen sections:
+- Use of add and remove classes to show and hide different on screen sections:
 
   ```javascript
   questionsScreen.classList.add("hide");
   endScreen.classList.remove("hide");
   ```
 
-* Use of JSON parsing and stringify to store variables to local storage:
+- Use of JSON parsing and stringify to store variables to local storage:
 
   ```javascript
   let storedHighScores = JSON.parse(localStorage.getItem("highScoresArray"));
   localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
   ```
 
-* Use of the sort function to sort the high scores leaderboard:
+- Use of the sort function to sort the high scores leaderboard:
 
   ```javascript
   function sortArray(storedHighScores) {
-  storedHighScores.sort((a,b) => {
-    return (b[1] - a[1])});
+    storedHighScores.sort((a, b) => {
+      return b[1] - a[1];
+    });
   }
   ```
 
-* Use of a while loop to remove the first child until there are none remaining:
+- Use of a while loop to remove the first child until there are none remaining:
 
   ```javascript
   while (highScoresOL.firstChild) {
-    highScoresOL.removeChild(highScoresOL.firstChild)
+    highScoresOL.removeChild(highScoresOL.firstChild);
   }
   ```
 
-* Use of event listener to call a function:
+- Use of event listener to call a function:
 
   ```javascript
-  clearBtn.addEventListener("click", clearHighScores)
+  clearBtn.addEventListener("click", clearHighScores);
   ```
 
-* Use of setTimeout to show and quickly hide again, a message giving the user visual feedback on their performance:
+- Use of setTimeout to show and quickly hide again, a message giving the user visual feedback on their performance:
 
   ```javascript
-  incorrect.classList.remove("hide")
-  setTimeout(function() {
-    incorrect.classList.add("hide")
+  incorrect.classList.remove("hide");
+  setTimeout(function () {
+    incorrect.classList.add("hide");
   }, 500);
   ```
 
@@ -195,11 +198,11 @@ Some of the key JavaScript skills being utilised:
 - ✅ ~~Add sounds for correct and incorrect answers~~
 - ✅ ~~Add visual feedback for if answer is correct or incorrect~~
 - ✅ ~~Add validation to initials entry~~
-- Build in data feedback of performance, e.g.
-  - number of questions answered
-  - ratio of correct to incorrect to unanswered
-  - average time taken per question
-  - display detail of question responses
+- ✅ ~~Build in data feedback of performance, e.g.~~
+  - ✅ ~~number of questions answered~~
+  - ✅ ~~percentage of correct to incorrect to unanswered~~
+  - ✅ ~~average time taken per question~~
+  - ✅ ~~display detail of question responses~~
 
 ## License
 

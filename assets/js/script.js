@@ -1,4 +1,5 @@
 // Reference to document elements
+const metrics = document.querySelector(".metrics");
 const timerDisplay = document.querySelector("#time");
 const scoreDisplay = document.querySelector("#score");
 const startBtn = document.querySelector("#start");
@@ -12,9 +13,13 @@ const incorrect = document.querySelector("#incorrect");
 const correctSound = document.querySelector("#correctSound");
 const incorrectSound = document.querySelector("#incorrectSound");
 const finalScore = document.querySelector("#final-score");
-const finalTime = document.querySelector("#final-time");
+const percCorrect = document.querySelector("#perc-corr");
+const percAttCorrect = document.querySelector("#perc-att-corr");
+const averageCorrect = document.querySelector("#ave-corr");
+const averageIncorrect = document.querySelector("#ave-incorr");
 const submitBtn = document.querySelector("#submit");
 const initials = document.querySelector("#initials");
+const performance = document.querySelector("#performance");
 
 // Declare possible question answers / colours
 const addQs = ["a", "b", "c", "d"];
@@ -73,10 +78,8 @@ function setTime() {
 
 // Provides contents to the currently displayed buttons
 function showQuestion(currQ) {
+  questions[currQ].timeStart = new Date();
   qBtn = document.querySelectorAll(".choice");
-  // store the value of the timer at this point in time - timerOnQuestion
-  // whenever answer is being clicked, the value of the timer is being stored again
-  // the time spent on the Q is the result of
   // Allows code to index into the question set and access each question in turn
   let key = Object.keys(questions);
   // Displays question number and question title
@@ -114,6 +117,8 @@ function compareAnswers(answer, correct) {
 
 // This is how the quiz ends
 function endQuiz() {
+  metrics.classList.add("hide");
+  displayPerformance();
   // If user has gone into negative time because of deductions, set their time to 0
   let timeLeftEnd;
   if (timeLeft < 0) {
@@ -124,7 +129,6 @@ function endQuiz() {
   // Store final score and times for display messages
   let scoreEnd = currScore;
   finalScore.textContent = scoreEnd;
-  finalTime.textContent = timeLeftEnd;
 
   // Hide the questions section and unhide the end screen
   questionsScreen.classList.add("hide");
@@ -135,11 +139,90 @@ function endQuiz() {
     submit(scoreEnd, timeLeftEnd);
   });
   initials.addEventListener("keyup", function (event) {
-    console.log(event.keyCode);
     if (event.keyCode === 13) {
       submit(scoreEnd, timeLeftEnd);
     }
   });
+}
+
+function displayPerformance() {
+  // Array for tracking performance through questions
+  let trackArray = [0, 0, 0, 0];
+  // For loop to create the chil elements needed to display the data about performance
+  for (let i = 0; i < Object.keys(questions).length; i++) {
+    // Capture information from the questions object for this question
+    let qUserChoice = questions[i + 1].userChoice;
+    let qCorrect = questions[i + 1].correct;
+    let userCorrect = qUserChoice === qCorrect;
+    let qTimeStart = questions[i + 1].timeStart;
+    let qTimeStop = questions[i + 1].timeStop;
+    // Calculate time to answer this question
+    let timeToAnswer = ((qTimeStop - qTimeStart) / 1000).toFixed(2);
+
+    // Create visuals for displaying this question
+    // Main div to hold information
+    let qPerf = document.createElement("div");
+    qPerf.classList.add("qPerf");
+    performance.appendChild(qPerf);
+    // h4 for question number and colour coded background
+    let h4Perf = document.createElement("h4");
+    h4Perf.textContent = `Q${i + 1}`;
+    // Add class to identify background colour
+    // Store performance in an array to track time/score for correct and incorrect answers
+    if (userCorrect) {
+      h4Perf.classList.add("correct");
+      trackArray[0]++;
+      trackArray[1] += timeToAnswer * 1;
+    } else if (qUserChoice === "Unanswered") {
+      h4Perf.classList.add("unanswered");
+    } else {
+      h4Perf.classList.add("incorrect");
+      trackArray[2]++;
+      trackArray[3] += timeToAnswer * 1;
+    }
+    // Add the h4 to the parent div
+    qPerf.appendChild(h4Perf).setAttribute("id", i + 1);
+
+    // Create p tags for time content underneath
+    let pPerf = document.createElement("p");
+    let pPerftxt = "";
+
+    // Check object to make sure question was answered
+    if (qTimeStop !== "" && qTimeStart !== "") {
+      pPerftxt = timeToAnswer + " seconds";
+    } else {
+      pPerftxt = "Unanswered";
+    }
+    pPerf.textContent = pPerftxt;
+    qPerf.appendChild(pPerf);
+  }
+
+  // Calculations on running totals stored from for loop
+  let aveCorrect = (trackArray[1] / trackArray[0]).toFixed(2);
+  let aveIncorrect = (trackArray[3] / trackArray[2]).toFixed(2);
+  let percCorr = (
+    (trackArray[0] / Object.keys(questions).length) *
+    100
+  ).toFixed(2);
+  let percAttCorr = (
+    (trackArray[0] / (trackArray[0] + trackArray[2])) *
+    100
+  ).toFixed(2);
+
+  // Function to decide how to display the information
+  checkUndefined(percCorr, percCorrect, "%");
+  checkUndefined(percAttCorr, percAttCorrect, "%");
+  checkUndefined(aveCorrect, averageCorrect, "");
+  checkUndefined(aveIncorrect, averageIncorrect, "");
+}
+
+// Checks if result is a number, to handle undefined cases where calculations divided by zero
+function checkUndefined(calculation, element, perc) {
+  if (calculation >= 0) {
+    element.textContent = calculation + perc;
+  } else {
+    element.textContent = "N/A";
+  }
 }
 
 function submit(scoreEnd, timeLeftEnd) {
@@ -212,8 +295,10 @@ function beginQuiz() {
     qBtn[i].setAttribute("id", addQs[i]);
     // Note: Need to add event listeners to the buttons before the buttons have content
     qBtn[i].addEventListener("click", function (event) {
+      questions[currQ].timeStop = new Date();
       // Collect target id as user's answer
       let answer = event.target.getAttribute("id");
+      questions[currQ].userChoice = answer;
       // Collects correct answer from questions object where currQ is the currently displayed question
       let correct = questions[currQ].correct;
       // Checks users answer against the correct answer. Note this will also increment score/time/question as necessary

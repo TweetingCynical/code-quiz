@@ -34,6 +34,7 @@ function addTime(sound) {
   scoreDisplay.innerText = currScore;
   sound.play();
   correct.classList.remove("hide");
+  // use setTimeout so that message is only displayed for 0.5s
   setTimeout(function () {
     correct.classList.add("hide");
   }, 500);
@@ -44,6 +45,7 @@ function subtractTime(sound) {
   timeLeft -= 10;
   sound.play();
   incorrect.classList.remove("hide");
+  // use setTimeout so that message is only displayed for 0.5s
   setTimeout(function () {
     incorrect.classList.add("hide");
   }, 500);

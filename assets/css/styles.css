@@ -4,6 +4,7 @@
 /* Add stored options for main and secondary colours used in site */
 :root {
   --mainColor: #3C1934;
+  --mainColorOP: #3c1934a0;
   --secondaryColor: #AA3619;
   --secondaryColorOP: #AA361980;
 }
@@ -67,7 +68,9 @@ button {
 }
 
 button:hover {
-  background-color: var(--secondaryColorOP);
+  background-color: var(--mainColor);
+  transform: scale(1.1);
+  transform-origin: center;
 }
 
 .choices button {
@@ -88,13 +91,14 @@ ol {
 }
 
 li {
-  padding: 5px;
+  padding: 10px;
   list-style: decimal inside none;
   text-align: left;
 }
 
 li:nth-child(odd) {
-  background-color: var(--secondaryColorOP);
+  background-color: var(--mainColor);
+  color: white;
 }
 
 .wrapper {

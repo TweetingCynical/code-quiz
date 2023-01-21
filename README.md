@@ -1,88 +1,204 @@
-# Module 6 Challenge Web APIs: Code Quiz
+# Code Quiz
 
-## Your Task
+## A simple coding quiz app which offers multiple choice answers, using JavaScript and CSS to interact with the html elements on the page
 
-As you proceed in your journey to becoming a front-end web developer, it’s likely that you’ll be asked to complete a coding assessment, perhaps as part of an interview process. A typical coding assessment is a combination of multiple-choice questions and interactive coding challenges. 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+        <li><a href="#about-the-project">About The Project</a></li>
+        <li><a href="#deployment">Deployment / Code Repository</a></li>
+        <li><a href="#screenshot">Screenshot</a></li>
+        <li><a href="#scope-and-purpose">Scope and Purpose</a></li>
+        <li><a href="#usage">Usage</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#pseudocode">Pseudocode</a></li>
+        <li><a href="#overview-of-build">Overview of Build</a></li>
+        <li><a href="#suggested-future-changes">Suggested Future Changes</a></li>
+        <li><a href="#license">License</a></li>
+      </ol>
+</details>
 
-To help you become familiar with these tests and give you a chance to apply the skills from this module, this week’s challenge invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. This week’s coursework has taught you all the skills you need to succeed in this challenge.
- 
+<!-- About the Project -->
+## About the Project
 
-## User Story
+### Deployment / Code Repository
 
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+[Live deployment](https://tweetingcynical.github.io/code-quiz/)
 
-## Acceptance Criteria
+[Repository](https://github.com/TweetingCynical/code-quiz)
 
-Create a code quiz that contains the following requirements:
+### Screenshot
 
-* A start button that when clicked a timer starts and the first question appears.
- 
-  * Questions contain buttons for each answer.
-  * 
-  * When answer is clicked, the next question appears
-  * 
-  * If the answer clicked was incorrect then subtract time from the clock
+Working version of site should look like this at standard screen size:
+![Site Screenshot](./assets/screenshot.png)
 
-* The quiz should end when all questions are answered or the timer reaches 0.
+### Scope and Purpose
 
-  * When the game ends, it should display their score and give the user the ability to save their initials and their score
-  
-## Mock-Up
+Build an interactive coding quiz with a series of multiple choice questions. The quiz should track the user's score, allow them to click a button to select their answer, and also track the time they have left. Finally, the user should be able to save their score to a high score page, and reset all stored scores on click of a clear button.
 
-The following animation demonstrates the application functionality:
+### Usage
 
-![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/08-web-apis-challenge-demo.gif)
+This site and its codeset are for educational purposes only.
 
-## Grading Requirements
+### Installation
 
-This challenge is graded based on the following criteria: 
+N/A
 
-### Technical Acceptance Criteria: 40%
+<!-- Pseudocode and overview of build -->
+## Pseudocode
 
-* Satisfies all of the above acceptance criteria.
+Steps to achieving the working quiz:
 
-### Deployment: 32%
+* Set an intial timer of 60 seconds, and a score of 0;
+* When user clicks start button:
+  - Timer begins countdown;
+  - Start screen set to hide;
+  - Remove questions class 'hide';
+  - h2 tag reads: QUESTION *ONE*;
+  - Four buttons for answer choices appear next to content of answers;
+* When user clicks correct answer:
+  - Timer +=5;
+  - Score ++;
+  - Display next question;
+* When user clicks incorrect answer:
+  - Timer -+5;
+  - Score no change;
+  - Display next question;
+* When either no more questions, or timer == 0, game ends:
+  - Hide questions; 
+  - Display end screen and score;
+* When user submits initials:
+  - Add score and initials to saved highscores object;
+  - Display highscores page, listing stored scores in descending order from top;
+    - This may require a for loop to append new child, and then access each child by index, assigning the text content by highest in the stored object;
+* When user clicks Go Back, return to initial state;
+* When user clicks clear Highscores, empty stored score and initial history.
 
-* Application deployed at live URL.
+## Overview of Build
 
-* Application loads with no errors.
+Some of the key JavaScript skills being utilised:
 
-* Application GitHub URL submitted.
+* Use of an object of objects for storing a scalable question bank;
+* Use of query selectors to get elements by id and class:
 
-* GitHub repository that contains application code.
+  ```javascript
+  qBtn = document.querySelectorAll(".choice")
+  const questionsScreen = document.querySelector('#questions')
+  ```
 
-### Application Quality: 15%
+* Use of for loops to create a set of buttons:
 
-* Application user experience is intuitive and easy to navigate.
+  ```javascript
+  for(let i = 0; i < addQs.length; i++) {
+    let opt = document.createElement('button');
+    questionChoices.appendChild(opt).setAttribute("class", "choice");
+  }
+  ```
 
-* Application user interface style is clean and polished.
+* Use of another for loop to supply each button with an event listener and its question/answer content. Also use of event.target to match the click target to its id:
 
-* Application resembles the mock-up functionality provided in the challenge instructions.
+  ```javascript
+  for(let i = 0; i < qBtn.length; i++) {
+  qBtn[i].setAttribute("id", addQs[i]);
+  qBtn[i].addEventListener("click", function(event){
+    if(event.target === this) {
+      let answer = event.target.getAttribute('id');
+      let correct = questions[currQ].correct;
+      compareAnswers(answer, correct)
+    }
+  });
+  ```
 
-### Repository Quality: 13%
+* Use of object.keys to allow indexing into an object:
 
-* Repository has a unique name.
+  ```javascript
+  let key = Object.keys(questions)
+  ```
 
-* Repository follows best practices for file structure and naming conventions.
+* Use of a timer to run every 1000ms:
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+  ```javascript
+  function setTime() {
+    let timerInterval = setInterval(function() {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        timerDisplay.textContent = 0;
+        clearInterval(timerInterval)
+        endQuiz()
+      } else {
+        timerDisplay.textContent = timeLeft;
+      }
+    }, 1000);
+  }
+  ```
 
-* Repository contains multiple descriptive commit messages.
+* Use of functions to track multiple changing variables and display them on screen:
 
-* Repository contains quality README file with description, screenshot, and link to deployed application.
+  ```javascript
+  function addTime() {
+    timeLeft +=5;
+    currScore ++;
+    scoreDisplay.innerText = currScore;
+  }
+  ```
 
+* Use of add and remove classes to show and hide different on screen sections:
 
-## Review
+  ```javascript
+  questionsScreen.classList.add("hide");
+  endScreen.classList.remove("hide");
+  ```
 
-You are required to submit BOTH of the following for review:
+* Use of JSON parsing and stringify to store variables to local storage:
 
-* The URL of the functional, deployed application.
+  ```javascript
+  let storedHighScores = JSON.parse(localStorage.getItem("highScoresArray"));
+  localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
+  ```
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+* Use of the sort function to sort the high scores leaderboard:
 
----
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+  ```javascript
+  function sortArray(storedHighScores) {
+  storedHighScores.sort((a,b) => {
+    return (b[1] - a[1])});
+  }
+  ```
+
+* Use of a while loop to remove the first child until there are none remaining:
+
+  ```javascript
+  while (highScoresOL.firstChild) {
+    highScoresOL.removeChild(highScoresOL.firstChild)
+  }
+  ```
+
+* Use of event listener to call a function:
+
+  ```javascript
+  clearBtn.addEventListener("click", clearHighScores)
+  ```
+
+### Suggested future changes
+
+- ✅ ~~Store how many seconds the user has left at the end of the game, for use in the high score board~~
+- Add sounds for correct and incorrect answers
+- Add visual feedback for if answer is correct or incorrect
+- Build in data feedback of performance, e.g.
+  - number of questions answered
+  - ratio of correct to incorrect to unanswered
+  - average time taken per question
+  - display detail of question responses
+
+## License
+
+MIT License
+
+Copyright (c) 2022 TweetingCynical
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

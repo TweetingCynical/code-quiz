@@ -1,12 +1,12 @@
 /* Import font from Google api */
-@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Comfortaa&display=swap");
 
 /* Add stored options for main and secondary colours used in site */
 :root {
-  --mainColor: #3C1934;
+  --mainColor: #3c1934;
   --mainColorOP: #3c1934a0;
-  --secondaryColor: #AA3619;
-  --secondaryColorOP: #AA361980;
+  --secondaryColor: #aa3619;
+  --secondaryColorOP: #aa361980;
 }
 
 *,
@@ -30,7 +30,8 @@ body {
   min-height: 600px;
 }
 
-header, footer {
+header,
+footer {
   text-align: center;
   padding: 10px;
   padding-top: 0px;
@@ -118,7 +119,8 @@ li:nth-child(odd) {
   color: green;
 }
 
-.start, .highScores {
+.start,
+.highScores {
   text-align: center;
   padding-bottom: 20px;
 }
@@ -127,7 +129,7 @@ li:nth-child(odd) {
   position: relative;
   top: 10px;
   left: 10px;
-} 
+}
 
 .feedback {
   font-style: bold;
@@ -160,8 +162,30 @@ li:nth-child(odd) {
 
 .errorAlert {
   color: red;
-  font-weight:bolder;
+  font-weight: bolder;
   font-size: 10px;
   margin-top: -20px;
   margin-left: 120px;
+}
+
+#a {
+  background-color: orangered;
+}
+#b {
+  background-color: forestgreen;
+}
+#c {
+  background-color: gold;
+}
+#d {
+  background-color: blue;
+}
+
+#a:hover,
+#b:hover,
+#c:hover,
+#d:hover {
+  background-color: var(--mainColor);
+  transform: scale(1.1);
+  transform-origin: center;
 }

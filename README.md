@@ -47,7 +47,25 @@ This site and its codeset are for educational purposes only.
 
 ### Installation
 
-N/A
+Quesion banks can be replaced in the questions.js file, but all questions should follow the same format. The first question structure is used to create the buttons on the quiz, so in effect, you can create a question with only 2 or even with 6 multiple choice answers, provided all subsequent questions use the same number. Here is what the structure looks like:
+
+```javascript
+const questions = {
+  1: {
+    question: "What is the correct way to write a JavaScript array?",
+    answers: {
+      a: 'let colors = "red", "blue", "green"',
+      b: 'let colors = ["red", "blue", "green"]',
+      c: 'let colors = (1:"red", 2:"blue", 3:"green")',
+      d: 'let colors = 1="red", 2="blue", 3="green"',
+    },
+    correct: "b",
+    userChoice: "Unanswered",
+    timeStart: "",
+    timeStop: "",
+  },
+};
+```
 
 <!-- Pseudocode and overview of build -->
 

@@ -20,9 +20,8 @@ const averageIncorrect = document.querySelector("#ave-incorr");
 const submitBtn = document.querySelector("#submit");
 const initials = document.querySelector("#initials");
 const performance = document.querySelector("#performance");
-
-// Declare possible question answers / colours
-const addQs = ["a", "b", "c", "d"];
+const keyQs = Object.keys(questions);
+const questionsLen = keyQs.length;
 
 // Set intial time/score details
 let timeLeft = 60;
@@ -81,13 +80,14 @@ function showQuestion(currQ) {
   questions[currQ].timeStart = new Date();
   qBtn = document.querySelectorAll(".choice");
   // Allows code to index into the question set and access each question in turn
-  let key = Object.keys(questions);
   // Displays question number and question title
-  questionTitle.textContent = key[currQ - 1] + ": " + questions[currQ].question;
+  questionTitle.textContent =
+    keyQs[currQ - 1] + ": " + questions[currQ].question;
 
   // For loop to add stored answers to each button in turn
+  let keyAs = Object.keys(questions[currQ].answers);
   for (let i = 0; i < qBtn.length; i++) {
-    qBtn[i].textContent = questions[currQ].answers[addQs[i]];
+    qBtn[i].textContent = questions[currQ].answers[keyAs[i]];
   }
 }
 
@@ -106,7 +106,7 @@ function compareAnswers(answer, correct) {
 
   // Do if question number has not reached the question bank limit
   // Using Object.keys and finding the length allows the app to be scalable to more or less questions
-  if (currQ <= Object.keys(questions).length) {
+  if (currQ <= questionsLen) {
     showQuestion(currQ);
   }
   // Do if no more questions in question bank
@@ -149,7 +149,7 @@ function displayPerformance() {
   // Array for tracking performance through questions
   let trackArray = [0, 0, 0, 0];
   // For loop to create the chil elements needed to display the data about performance
-  for (let i = 0; i < Object.keys(questions).length; i++) {
+  for (let i = 0; i < questionsLen; i++) {
     // Capture information from the questions object for this question
     let qUserChoice = questions[i + 1].userChoice;
     let qCorrect = questions[i + 1].correct;
@@ -200,14 +200,11 @@ function displayPerformance() {
   // Calculations on running totals stored from for loop
   let aveCorrect = (trackArray[1] / trackArray[0]).toFixed(2);
   let aveIncorrect = (trackArray[3] / trackArray[2]).toFixed(2);
-  let percCorr = (
-    (trackArray[0] / Object.keys(questions).length) *
-    100
-  ).toFixed(2);
+  let percCorr = ((trackArray[0] / questionsLen) * 100).toFixed(0);
   let percAttCorr = (
     (trackArray[0] / (trackArray[0] + trackArray[2])) *
     100
-  ).toFixed(2);
+  ).toFixed(0);
 
   // Function to decide how to display the information
   checkUndefined(percCorr, percCorrect, "%");
@@ -283,8 +280,10 @@ function beginQuiz() {
   startScreen.classList.add("hide");
   questionsScreen.classList.remove("hide");
 
-  // For loop to append children (buttons) to question choices section. AddQs array makes it scalable for more possible answers
-  for (let i = 0; i < addQs.length; i++) {
+  // For loop to append children (buttons) to question choices section.
+  // Note: All questions should have 4 option answers
+  let keyAs = Object.keys(questions[currQ].answers);
+  for (let i = 0; i < keyAs.length; i++) {
     let opt = document.createElement("button");
     questionChoices.appendChild(opt).setAttribute("class", "choice");
   }
@@ -292,7 +291,7 @@ function beginQuiz() {
   // For loop to add event listeners to each button, and collect id from event.target button clicked
   const qBtn = document.querySelectorAll(".choice");
   for (let i = 0; i < qBtn.length; i++) {
-    qBtn[i].setAttribute("id", addQs[i]);
+    qBtn[i].setAttribute("id", keyAs[i]);
     // Note: Need to add event listeners to the buttons before the buttons have content
     qBtn[i].addEventListener("click", function (event) {
       questions[currQ].timeStop = new Date();

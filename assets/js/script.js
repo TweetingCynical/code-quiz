@@ -20,6 +20,8 @@ const averageIncorrect = document.querySelector("#ave-incorr");
 const submitBtn = document.querySelector("#submit");
 const initials = document.querySelector("#initials");
 const performance = document.querySelector("#performance");
+
+// Reference to questions object
 const keyQs = Object.keys(questions);
 const questionsLen = keyQs.length;
 

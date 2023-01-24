@@ -17,7 +17,7 @@ const questions = {
     question: "How do you create a function in JavaScript?",
     answers: {
       a: "function = myFunction()",
-      b: "function myFunction()",
+      b: "function() myFunction{}",
       c: "myFunction:function()",
       d: "let myFunction = function()",
     },
@@ -84,12 +84,13 @@ const questions = {
   },
 
   7: {
-    question: "How do you write a JavaScript switch statement?",
+    question:
+      "How would you get access to an element with the id 'first-button'?",
     answers: {
-      a: 'switch (i) {case 0: x = "zero"; break; case 1: x = "one"; break;}',
-      b: 'switch i {case 0: x = "zero"; break; case 1: x = "one"; break;}',
-      c: 'switch i {case "0": x = "zero"; break; case "1": x = "one"; break;}',
-      d: 'switch (i) {case "0": x = "zero"; break; case "1": x = "one"; break;}',
+      a: 'let myFirstButton = document.querySelector("#first-button")',
+      b: 'let myFirstButton = document.querySelectorAll("#first-button")',
+      c: 'let myFirstButton = document.querySelector(".first-button")',
+      d: 'let myFirstButton = button.querySelector("first-button")',
     },
     correct: "a",
     userChoice: "Unanswered",
